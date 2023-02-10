@@ -17,19 +17,19 @@ public class CarControllers {
     @Autowired
     private CarRepository carRepository;
 
-    @PostMapping("")
+    @PostMapping("/post")
     public Car create(@RequestBody Car car){
         Car carSaved = carRepository.saveAndFlush(car);
         return carSaved;
     }
 
-    @GetMapping("")
+    @GetMapping("/getAllCar")
     public List<Car> getAllCar(){
         return carRepository.findAll();
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/getSingleCar/{id}")
     public Car getSingleCar(@PathVariable long id){
         Car car;
         if(carRepository.existsById(id)){
@@ -40,7 +40,7 @@ public class CarControllers {
     }
 
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateCar/{id}")
     public Car updateCar(@PathVariable long id, @RequestParam String type){
         Car car;
         if (carRepository.existsById(id)){
@@ -53,7 +53,7 @@ public class CarControllers {
         return car;
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteSingleCar/{id}")
     public void deleteSingleCar(@PathVariable long id){
         if(carRepository.existsById(id)){
             carRepository.deleteById(id);
@@ -62,7 +62,7 @@ public class CarControllers {
         }
     }
 
-    @DeleteMapping("")
+    @DeleteMapping("/deleteAll")
     public void deleteAll(){
         carRepository.deleteAll();
     }
